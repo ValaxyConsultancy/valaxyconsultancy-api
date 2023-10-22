@@ -1,16 +1,30 @@
-<project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
-    <artifactId>my-web-app</artifactId>
-    <version>${BUILD_NUMBER}</version> <!-- Use Jenkins BUILD_NUMBER for version -->
-    <packaging>war</packaging>
-    <name>My Web Application</name>
 
-    <!-- ... Other configurations ... -->
+    <groupId>com.sarav</groupId>
+    <artifactId>TomcatMavenApp</artifactId>
+    <version>2.0</version>
+    <packaging>war</packaging>
+
+    <name>TomcatMavenApp</name>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin Configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -19,12 +33,10 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <compilerArguments>
-                        <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
-
-            <!-- Maven WAR Plugin Configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -33,8 +45,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-
-            <!-- Maven Dependency Plugin Configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -46,7 +56,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
                             <silent>true</silent>
                             <artifactItems>
                                 <artifactItem>
@@ -62,4 +72,6 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
+
