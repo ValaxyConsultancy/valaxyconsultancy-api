@@ -1,0 +1,24 @@
+---
+- name: Pull and Run Docker Image on Dev Servers
+  hosts: dev_servers  # Replace with your list of development servers
+  vars:
+    docker_hub_username: shufai  # Replace with your Docker Hub username
+    docker_hub_password: Dzesinyuy1@  # Replace with your Docker Hub password
+    docker_image_name: shufai/valaxy-webapp-image:latest  # Replace with your Docker Hub image name and tag
+  tasks:
+    - name: Log in to Docker Hub (on dev servers)
+      command: docker login -u "{{ docker_hub_username }}" -p "{{ docker_hub_password }}"
+    
+    - name: Pull Docker image from Docker Hub
+      command: docker pull "{{ docker_image_name }}"
+    
+    - name: Stop Docker container if running
+      command: docker stop valaxy-webapp-container
+      ignore_errors: yes
+    
+    - name: Remove Docker container if it exists
+      command: docker rm valaxy-webapp-container
+      ignore_errors: yes
+    
+    - name: Run Docker container
+      command: docker run -d --name valaxy-webapp-container -p 8080:8080 "{{ docker_image_name }}"

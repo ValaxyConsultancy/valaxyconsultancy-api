@@ -1,0 +1,14 @@
+---
+- name: Build and Push Docker Image
+  hosts: localhost  # Replace with the host where you want to build the Docker image
+  tasks:
+    - name: Build Docker image
+      command: docker build -t shufai/valaxy-webapp-image:latest .
+      args:
+        chdir: ~/  # Replace with the path to your application
+
+    - name: Log in to Docker Hub
+      command: docker login -u shufai -p Dzesinyuy1@
+
+    - name: Push Docker image to Docker Hub
+      command: docker push shufai/valaxy-webapp-image:latest  # Push to your Docker Hub repository
