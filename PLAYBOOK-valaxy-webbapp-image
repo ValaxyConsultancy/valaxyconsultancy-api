@@ -1,0 +1,12 @@
+---
+- name: Build and Push Docker Image
+  hosts: localhost
+  tasks:
+    - name: Build and Push image
+      command: docker build -t waltybrown/valaxy-webapp-image:latest .
+      args:
+        chdir: ~/ #Replace with the path to your application
+    - name: Log in to Docker Hub
+      command: docker login -u waltybrown -p Prodigy2020!2
+    - name: Push Docker image to Docker Hub
+      command: docker push waltybrown/valaxy-webapp-image:latest #Push to your Docker Hub repository
