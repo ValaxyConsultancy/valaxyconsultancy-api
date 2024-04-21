@@ -3,7 +3,7 @@
   hosts: dev_servers  # Replace with your list of development servers
   vars:
     docker_hub_username: shufai  # Replace with your Docker Hub username
-    docker_hub_password: Dzesinyuy1@  # Replace with your Docker Hub password
+    docker_hub_password: xxxxxxxx  # Replace with your Docker Hub password
     docker_image_name: shufai/valaxy-webapp-image:latest  # Replace with your Docker Hub image name and tag
   tasks:
     - name: Log in to Docker Hub (on dev servers)
